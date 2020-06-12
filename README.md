@@ -38,6 +38,6 @@ password: admin
 
 //--------------------------------------------------------------------------------
 
-SCREENSHOTS:
+SCREENSHOT:
 
 ![Image description](https://github.com/nathalis/NCX-panel-1.0-Nathalis-Minecraft-Server-Admin-Panel/raw/master/screenshots/NCX-panel_3.png)
