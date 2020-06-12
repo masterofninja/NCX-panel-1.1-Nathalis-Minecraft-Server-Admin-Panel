@@ -38,5 +38,5 @@ password: admin
 
 //--------------------------------------------------------------------------------
 
-Contact information:
-Email: nathalis.cortex@gmail.com
+SCREENSHOTS:
+
