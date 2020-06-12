@@ -9,14 +9,17 @@ NCX Panel also has additional features other than starting, stopping or sending 
 
 Requirements:
 
+```
 1.) Linux (Ubuntu or Raspbian or something like that)
 2.) PHP
 3.) enabled EXEC function
 4.) SCREEN (sudo apt-get install screen)
 5.) JAVA (sudo apt-get install openjdk-8-jre)
+```
 
 Features:
 
+```
 1.) Start and stop your server from the web.
 2.) View console and send commands.
 3.) View your servers CPU and RAM usage
@@ -24,11 +27,14 @@ Features:
 5.) View server status by Query
 6.) Autostart script instalation steps
 7.) Login system
+```
 
 Default login informations:
 
+```
 login:    admin
 password: admin
+```
 
 //--------------------------------------------------------------------------------
 
