@@ -1,7 +1,7 @@
-# NCX-panel-1.0-Nathalis-Minecraft-Server-Admin-Panel
-NCX panel 1.0 - Nathalis Minecraft Server Admin Panel
+# NCX-panel-1.1-Nathalis-Minecraft-Server-Admin-Panel
+NCX panel 1.1 - Nathalis Minecraft Server Admin Panel
 
-NCX Panel 1.0 is a PHP backend Minecraft server control panel for Linux. 
+NCX Panel 1.1 is a PHP backend Minecraft server control panel for Linux. 
 It is possible to install a background process that will start the minecraft server at system startup and the console is just as functional as at normal startup.
 NCX Panel also has additional features other than starting, stopping or sending commands to a server.
 
@@ -40,4 +40,4 @@ password: admin
 
 SCREENSHOT:
 
-![Image description](https://github.com/nathalis/NCX-panel-1.0-Nathalis-Minecraft-Server-Admin-Panel/raw/master/screenshots/NCX-panel_3.png)
+![Image description](https://github.com/nathalis/NCX-panel-1.1-Nathalis-Minecraft-Server-Admin-Panel/raw/master/screenshots/NCX-panel_3.png)
