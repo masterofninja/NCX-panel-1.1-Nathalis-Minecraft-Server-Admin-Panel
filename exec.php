@@ -13,7 +13,7 @@ if(isset($_POST['cmd'])) {$cmd = $_POST['cmd'];}
 		            file_put_contents(SERVER_LOG_DIR, "[" . date("h:i:s") . "] [SYSTM]: Recieved start command, starting server... \n", FILE_APPEND);
                 
                 //Nathalis fixed:
-                $cmd = "cd ". $_SERVER['DOCUMENT_ROOT'] . "/" . SERVER_ROOT_DIR."; java -jar server.jar nogui;";
+                $cmd = "cd ".SERVER_ROOT_DIR."; java -jar server.jar nogui;";
                 $output = exec("screen -S Minecraft -t MinecraftWindow -A -d -m bash -c '".$cmd."'\n");
                 
                                 
