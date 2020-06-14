@@ -41,7 +41,7 @@
 
    if (isset($_POST["saveprops"])) { 
       if (isset($_POST["propscode"]) && trim($_POST["propscode"]) != "") {  $propscode=$_POST["propscode"]; }
-      if ($propscode!="") file_put_contents(__DIR__."/".SERVER_ROOT_DIR."server.properties", $propscode);      
+      if ($propscode!="") file_put_contents(SERVER_ROOT_DIR."server.properties", $propscode);      
 
       header("Refresh:0");   
    }   
