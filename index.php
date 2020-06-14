@@ -33,11 +33,20 @@
       if (isset($_POST["serverip"]) && trim($_POST["serverip"]) != "") {  $serverip=trim($_POST["serverip"]); }
       if (isset($_POST["serverport"]) && trim($_POST["serverport"]) != "") {  $serverport=trim($_POST["serverport"]); }
       if (isset($_POST["serverrootdir"]) && trim($_POST["serverrootdir"]) != "") {  $serverrootdir=trim($_POST["serverrootdir"]); }
-      if (isset($_POST["serverlogdir"]) && trim($_POST["serverlogdir"]) != "") {  $serverlogdir=trim($_POST["serverlogdir"]); }
+      if (isset($_POST["serverlogdir"]) && trim($_POST["serverlogdir"]) != "") {  $serverlogdir=trim($_POST["serverlogdir"]); }    
       file_put_contents("config/config.php", "<"."?"."php\ndefine(\"USERNAME\", \"".$username."\");\ndefine(\"PASSWORD\", '".$hash."');\n\ndefine(\"SERVER_NAME\", \"".$servername."\");\ndefine(\"SERVER_IP\", \"".$serverip."\");\ndefine(\"SERVER_PORT\", \"".$serverport."\");\n\ndefine(\"SERVER_ROOT_DIR\", \"".$serverrootdir."\");\ndefine(\"SERVER_LOG_DIR\", SERVER_ROOT_DIR.\"".$serverlogdir."\");\n?".">");
   
       header("Refresh:0");   
    }   
+
+   if (isset($_POST["saveprops"])) { 
+      if (isset($_POST["propscode"]) && trim($_POST["propscode"]) != "") {  $propscode=$_POST["propscode"]; }
+      if ($propscode!="") file_put_contents(__DIR__."/".SERVER_ROOT_DIR."server.properties", $propscode);      
+
+      header("Refresh:0");   
+   }   
+
+ 
 
 //******************************************************************************
 //**   Minecraft Query
@@ -230,6 +239,7 @@ function get_server_cpu_usage(){
    table.table_settings tfoot td {font-size: 12px;}
 /******************************************************************************/          
    #scriptcode {width:90%;min-width:640px;height:auto;display:table;border:1px solid #a0a0a0;color:#ffffff;padding:12px;background-color:#404040;margin:8px 0px 8px 0px;}
+   #propscode {width:90%;min-width:640px;height:100%;display:table;border:1px solid #a0a0a0;color:#ffffff;padding:12px;background-color:#404040;margin:8px 0px 8px 0px;}
 </style>
 <script type="text/javascript">
    $(document).ready(function() {
@@ -310,7 +320,10 @@ function get_server_cpu_usage(){
       }
 
       function command(e) {
-     	   var key = e.keyCode || e.charCode;
+         var active = $( "#tabs" ).tabs( "option", "active" );
+         if (active==0) {
+          
+         var key = e.keyCode || e.charCode;
          if (e.keyCode==undefined || e.keyCode==null) key=191;
          if (key == 13) { // ENTER
             var cmd = $("#cmd-input").val();
@@ -352,11 +365,12 @@ function get_server_cpu_usage(){
             }
             togglecmdi = 0;
          }
+         }
       }    
 
       $(document).on('keydown', command);
       $("#servercmdshow").click(command); // for phone/tablet
-
+      
       $(".server-status").click(function() {
          ss();
       });
@@ -403,7 +417,7 @@ function get_server_cpu_usage(){
          var index = $($(this).attr("href")).index() - 1;
          $("#tabs").tabs("option", "active", index);
       });
-//------------------------------------------------------------------------------            
+      //------------------------------------------------------------------------------            
       $("#startcmd").click(function() {
          $.ajax({         
             method: "POST",
@@ -459,9 +473,41 @@ function get_server_cpu_usage(){
             success: function(response){ 
                $("#cpuusage").html("<span style='color: #01d201;'>CPU:</span> "+Math.round(response*100)+"%");
             }
-         }); 
+         });
+         
       }, 3000);
 //******************************************************************************
+/*$('#propscode').css({'display':'block','visibility':'hidden'});
+
+         $("textarea:visible").each(function(textarea) {
+            $(this).height( $(this)[0].scrollHeight );
+         }); 
+
+/*
+$('#propscode').load("TEST", function() {
+
+
+  //$('#textarea').load("TEST");
+  
+  
+});         */
+
+$("#tabs ul li a").eq(4).click(function() {
+$("textarea").each(function(textarea) {
+    $(this).height( $(this)[0].scrollHeight );
+});
+});
+
+
+
+
+$("textarea").each(function(textarea) {
+    $(this).height( $(this)[0].scrollHeight );
+});
+
+
+
+
    });
 </script>
 </head>
@@ -508,6 +554,7 @@ function get_server_cpu_usage(){
             <li><a href="#tabs-2">STATUS</a></li>
             <li><a href="#tabs-3">SETTINGS</a></li>
             <li><a href="#tabs-4">AUTOSTART</a></li>
+            <li><a href="#tabs-5">PROPERTIES</a></li>
             <a href="logout.php"><div id="logout" style="">LOGOUT</div></a>
          </ul>
 <!----------------------------------------------------------------------------->
@@ -618,7 +665,7 @@ function get_server_cpu_usage(){
 <pre>
 cp Minecraft.sh /etc/init.d/Minecraft.sh
 sudo chmod 755 /etc/init.d/Minecraft.sh
-sudo update-rc.d Minecraft defaults
+sudo update-rc.d Minecraft.sh defaults
 reboot
 </pre>
             </div>
@@ -629,6 +676,21 @@ sudo update-rc.d Minecraft disable
 sudo update-rc.d -f Minecraft remove 
 </pre>
             </div>
+         </div>
+<!----------------------------------------------------------------------------->
+         <div id="tabs-5">   
+            <form style="width:640px;" action="index.php#tabs-5" method="post">
+            <textarea name="propscode" id="propscode" style="" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>
+<?php 
+$fprops = fopen(SERVER_ROOT_DIR.'server.properties','r');
+while ($line = fgets($fprops)) {
+  echo($line);                        
+}
+fclose($fprops);
+?>            
+            </textarea>            
+            <input type="submit" name="saveprops" value="Save Settings" />
+             </form><br />
          </div>
 <!----------------------------------------------------------------------------->
       </div>

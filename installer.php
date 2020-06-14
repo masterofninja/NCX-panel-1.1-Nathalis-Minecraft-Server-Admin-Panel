@@ -8,13 +8,15 @@
    "sleep 1"."\n".
    "chmod +x ".__DIR__."/command.php"."\n".
    "sudo -u www-data php command.php \"screen -S Minecraft -t MinecraftWindow -A -d -m bash -c 'cd ".SERVER_ROOT_DIR."; java -jar server.jar nogui;'\""."\n".
-   "chmod -R 777 ".__DIR__."/".SERVER_ROOT_DIR."\n".
+   "chmod -R 777 ".SERVER_ROOT_DIR."\n".
    "\nexit 0\n";
 
    
-
-   file_put_contents("/etc/init.d/Minecraft.sh", $batchdata);
-   chmod("Minecraft.sh",0777);  
+   file_put_contents("Minecraft.sh", $batchdata);
+   
+   //file_put_contents("/etc/init.d/Minecraft.sh", $batchdata);
+   //chmod("Minecraft.sh",0777);
+     
    //$status=exec("sudo -u root cp /var/www2/Minecraft.sh /etc/init.d/Minecraft.sh ");
    //echo($status);
 
